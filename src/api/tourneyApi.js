@@ -22,7 +22,7 @@ export default class TourneyApi {
     }
 
     userSignup = async (credentials) => {
-        const url = `${this.baseUrl}/users/sign-up`;
+        const url = `${this.apiHost}/users/sign-up`;
         const response = await fetch(url, {
             method: 'POST',
             headers: this.headers({"Content-Type": "application/json; charset=utf-8"}),
@@ -30,6 +30,17 @@ export default class TourneyApi {
         });
         return handleErrors(response);
     }
+
+    userLogin = async (credentials) => {
+        const url = `${this.apiHost}/users/login`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: this.headers({}),
+            body: JSON.stringify(credentials)
+        });
+        return handleErrors(response);
+    }
+
 
 
 }

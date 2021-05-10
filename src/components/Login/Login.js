@@ -90,6 +90,9 @@ export function Login({setToken}) {
 
     return (
         <div>
+            <Header as='h1' color='blue' style={{paddingTop: '20px'}} textAlign='center'>
+                Tourney
+            </Header>
             <Segment inverted>
                 <Dimmer active={loadingLogin || loadingRegister}>
                     <Loader>{signup ? "Creating Account..." : "Logging In..."}</Loader>
@@ -97,7 +100,7 @@ export function Login({setToken}) {
                 <Grid textAlign='center' style={{height: '100vh'}} verticalAlign='middle'>
                     <Grid.Column style={{maxWidth: 450}}>
                         <Header as='h2' color='blue' textAlign='center'>
-                            {signup ? " Sign Up To Start Trading! " : " Login To Your Account "}
+                            {signup ? " Sign Up " : " Login To Your Account "}
                         </Header>
                         <Form size='large'>
                             <Segment stacked>
@@ -110,7 +113,7 @@ export function Login({setToken}) {
                                     onChange={e => setUserName(e.target.value)}
                                 />
                                 {signup ?
-                                    <div>
+                                    <div className={'field'}>
                                         <Form.Input
                                             fluid
                                             icon='mail'
@@ -120,7 +123,6 @@ export function Login({setToken}) {
                                             onChange={e => setEmail(e.target.value)}
                                             error={invalidEmail ? "Invalid Email" : false}
                                         />
-                                        <br/>
                                     </div>
                                     : ""}
                                 <Form.Input
@@ -169,3 +171,7 @@ export function Login({setToken}) {
     )
 
 }
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+}
+

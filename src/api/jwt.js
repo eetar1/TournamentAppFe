@@ -12,7 +12,7 @@ export function Jwt() {
     const [token, setToken] = useState(getToken());
 
     const saveToken = userToken => {
-        sessionStorage.setItem('access_token', JSON.stringify(userToken));
+        sessionStorage.setItem('tourney_access_token', JSON.stringify(userToken));
         setToken(userToken.access_token);
         api.updateToken();
     };

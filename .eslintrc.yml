@@ -3,6 +3,7 @@ env:
   es2021: true
 extends:
   - 'plugin:react/recommended'
+  - 'plugin:css-modules/recommended'
   - standard
 parserOptions:
   ecmaFeatures:
@@ -11,6 +12,7 @@ parserOptions:
   sourceType: module
 plugins:
   - react
+  - css-modules
 rules: {}
 parser: "babel-eslint"
 settings:

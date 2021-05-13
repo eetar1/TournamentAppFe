@@ -1,25 +1,24 @@
-import React, {useState} from 'react';
-import {Menu, Segment} from 'semantic-ui-react';
-import {useHistory} from 'react-router-dom';
+import React, { useState } from 'react'
+import { Menu, Segment } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-export function NavBar({setToken}) {
-    const [activePath, setActivePath] = useState(window.location.pathname);
-    const history = useHistory();
+export function NavBar ({ setToken }) {
+  const [activePath, setActivePath] = useState(window.location.pathname)
+  const history = useHistory()
 
+  function handleItemClick (path) {
+    history.push(path)
+    setActivePath(path)
+  }
 
-    function handleItemClick(path) {
-        history.push(path);
-        setActivePath(path);
-    }
+  function handleLogout () {
+    history.push('/')
+    setToken('')
+    sessionStorage.removeItem('tourney_access_token')
+  }
 
-    function handleLogout() {
-        history.push('/');
-        setToken("");
-        sessionStorage.removeItem('tourney_access_token');
-    }
-
-
-    return (
+  return (
         <Segment inverted>
             <Menu inverted secondary size='large'>
                 <Menu.Item
@@ -45,5 +44,8 @@ export function NavBar({setToken}) {
                 </Menu.Menu>
             </Menu>
         </Segment>
-    )
+  )
+}
+NavBar.propTypes = {
+  setToken: PropTypes.func.isRequired
 }

@@ -1,46 +1,44 @@
-import React, {useEffect, useState} from 'react';
-import {Grid, Loader, Segment, Dimmer, Header, Divider, Card, CardDescription} from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react'
+import { Grid, Loader, Segment, Dimmer, Header, Divider, Card, CardDescription } from 'semantic-ui-react'
 import './Dashboard.css'
-import {api} from "../../api/api";
-import {toast} from 'react-toastify';
+import { api } from '../../api/api'
+import { toast } from 'react-toastify'
 
-export function Dashboard() {
+export function Dashboard () {
+  const loading = ''
+  const [tournaments, setTournaments] = useState({})
+  const [teams, setTeams] = useState({})
 
-    let loading = '';
-    const [tournaments, setTournaments] = useState({});
-    const [teams, setTeams] = useState({});
+  useEffect(() => {
+    async function getTopTournaments () {
+      try {
+        const tournaments = await api.getTopTournaments(5)
+        setTournaments(tournaments.content)
+      } catch (e) {
+        toast.error('Error Fetching User Account.')
+        console.log('Error Fetching User Account. Possible bad JWT, you will be logged out.' + e)
+      }
+    }
 
-    useEffect(() => {
-        async function getTopTournaments() {
-            try {
-                let tournaments = await api.getTopTournaments(5);
-                setTournaments(tournaments.content)
-            } catch (e) {
-                toast.error("Error Fetching User Account.");
-                console.log("Error Fetching User Account. Possible bad JWT, you will be logged out." + e);
-            }
-        }
+    getTopTournaments()
+  }, [tournaments.content])
 
-        getTopTournaments();
-    }, [tournaments.content]);
+  useEffect(() => {
+    async function getTopTeams () {
+      try {
+        const teams = await api.getTopTeams(5)
+        setTeams(teams.content)
+      } catch (e) {
+        toast.error('Error Fetching User Account.')
+        console.log('Error Fetching User Account. Possible bad JWT, you will be logged out.' + e)
+      }
+    }
 
+    getTopTeams()
+  }, [teams.content])
 
-    useEffect(() => {
-        async function getTopTeams() {
-            try {
-                let teams = await api.getTopTeams(5);
-                setTeams(teams.content)
-            } catch (e) {
-                toast.error("Error Fetching User Account.");
-                console.log("Error Fetching User Account. Possible bad JWT, you will be logged out." + e);
-            }
-        }
-
-        getTopTeams();
-    }, [teams.content]);
-
-    return (
-        <div style={{padding: "20px"}}>
+  return (
+        <div style={{ padding: '20px' }}>
             <Segment raised padded inverted className='main-segment-style'>
                 <Dimmer active={loading !== ''}>
                     <Loader>{`Loading ${loading}...`}</Loader>
@@ -51,12 +49,12 @@ export function Dashboard() {
                         <Grid.Column width={10} verticalAlign="top">
                             <Header color="teal" as="h1" content="Popular Tournaments"/>
                             <Divider/>
-                            {tournaments.length > 0 ?
-                                <Card.Group color="green" centered items={tournaments.map((tournament, i) => {
-                                    return {
-                                        children:
+                            {tournaments.length > 0
+                              ? <Card.Group color="green" centered items={tournaments.map((tournament, i) => {
+                                return {
+                                  children:
                                             <div className='portfolio-card-container'>
-                                                <Grid style={{width: '100%', marginBottom:'-2rem'}} divided='vertically'>
+                                                <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
                                                     <Grid.Row columns={4}>
                                                         <Grid.Column>
                                                             <Header content={tournament.name} color="teal"/>
@@ -76,23 +74,23 @@ export function Dashboard() {
                                                     </Grid.Row>
                                                 </Grid>
                                             </div>,
-                                        color: 'teal',
-                                        fluid: true,
-                                        className: "portfolio-cards",
-                                        key: i,
-                                        href: `/tournaments/${tournament.id}`
-                                    }
-                                })}/>
-                                : 'No Upcoming tournaments scheduled.'}
+                                  color: 'teal',
+                                  fluid: true,
+                                  className: 'portfolio-cards',
+                                  key: i,
+                                  href: `/tournaments/${tournament.id}`
+                                }
+                              })}/>
+                              : 'No Upcoming tournaments scheduled.'}
                         </Grid.Column>
-                        <Grid.Column style={{paddingTop: '2rem'}} width={10}>
+                        <Grid.Column style={{ paddingTop: '2rem' }} width={10}>
                             <Header color="teal" as="h1" content="Top Teams"/>
-                            {teams.length > 0 ?
-                                <Card.Group color="green" centered items={teams.map((team, i) => {
-                                    return {
-                                        children:
+                            {teams.length > 0
+                              ? <Card.Group color="green" centered items={teams.map((team, i) => {
+                                return {
+                                  children:
                                             <div className='portfolio-card-container'>
-                                                <Grid style={{width: '100%', marginBottom:'-2rem'}} divided='vertically'>
+                                                <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
                                                     <Grid.Row columns={4}>
                                                         <Grid.Column>
                                                             <Header content={team.name} color="teal"/>
@@ -112,14 +110,14 @@ export function Dashboard() {
                                                     </Grid.Row>
                                                 </Grid>
                                             </div>,
-                                        color: 'teal',
-                                        fluid: true,
-                                        className: "portfolio-cards",
-                                        key: i,
-                                        href: `/teams/${team.id}`
-                                    }
-                                })}/>
-                                : 'No Upcoming tournaments scheduled.'}
+                                  color: 'teal',
+                                  fluid: true,
+                                  className: 'portfolio-cards',
+                                  key: i,
+                                  href: `/teams/${team.id}`
+                                }
+                              })}/>
+                              : 'No Upcoming tournaments scheduled.'}
                             <Divider/>
                         </Grid.Column>
                     </div>
@@ -130,7 +128,5 @@ export function Dashboard() {
                 </Grid>
             </Segment>
         </div>
-    )
-
+  )
 }
-

@@ -85,6 +85,7 @@ export function Dashboard () {
                         </Grid.Column>
                         <Grid.Column style={{ paddingTop: '2rem' }} width={10}>
                             <Header color="teal" as="h1" content="Top Teams"/>
+                            <Divider/>
                             {teams.length > 0
                               ? <Card.Group color="green" centered items={teams.map((team, i) => {
                                 return {
@@ -118,7 +119,6 @@ export function Dashboard () {
                                 }
                               })}/>
                               : 'No Upcoming tournaments scheduled.'}
-                            <Divider/>
                         </Grid.Column>
                     </div>
                     <Grid.Column width={6}>

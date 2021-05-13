@@ -8,9 +8,9 @@ export default class TourneyApi {
     }
 
     updateToken = () => {
-        const tokenString = sessionStorage.getItem('access_token');
+        const tokenString = sessionStorage.getItem('tourney_access_token');
         const userToken = JSON.parse(tokenString);
-        this.jwt = userToken.access_token;
+        this.jwt = userToken ? userToken?.access_token : null;
     }
 
     headers = (headers) => {
@@ -41,6 +41,23 @@ export default class TourneyApi {
         return handleErrors(response);
     }
 
+    getTopTournaments = async (pageSize = 0) => {
+        const url = `${this.apiHost}/tournaments/all?size=${pageSize}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: this.headers({"Content-Type": "application/json; charset=utf-8"}),
+        });
+        return handleErrors(response)
+    }
+
+    getTopTeams = async (pageSize = 20) => {
+        const url = `${this.apiHost}/teams/top?size=${pageSize}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: this.headers({"Content-Type": "application/json; charset=utf-8"}),
+        });
+        return handleErrors(response)
+    }
 
 
 }
@@ -51,4 +68,5 @@ function handleErrors(response) {
     }
     return response.json()
 }
+
 

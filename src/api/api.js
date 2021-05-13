@@ -4,7 +4,7 @@ let beURL = 'http://localhost:8080/tourney';
 let api;
 
 const getToken = () => {
-    const tokenString = sessionStorage.getItem('access_token');
+    const tokenString = sessionStorage.getItem('tourney_access_token');
     const userToken = JSON.parse(tokenString);
     return userToken?.access_token
 };

@@ -89,10 +89,6 @@ export function Login({setToken}) {
 
 
     return (
-        <div>
-            <Header as='h1' color='blue' style={{paddingTop: '20px'}} textAlign='center'>
-                Tourney
-            </Header>
             <Segment inverted>
                 <Dimmer active={loadingLogin || loadingRegister}>
                     <Loader>{signup ? "Creating Account..." : "Logging In..."}</Loader>
@@ -167,7 +163,6 @@ export function Login({setToken}) {
                     </Grid.Column>
                 </Grid>
             </Segment>
-        </div>
     )
 
 }

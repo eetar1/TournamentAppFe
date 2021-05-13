@@ -1,14 +1,13 @@
 import TourneyApi from './tourneyApi'
 
-let beURL = 'http://localhost:8080/tourney';
-let api;
+const beURL = 'http://localhost:8080/tourney'
 
 const getToken = () => {
-    const tokenString = sessionStorage.getItem('tourney_access_token');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.access_token
-};
+  const tokenString = sessionStorage.getItem('tourney_access_token')
+  const userToken = JSON.parse(tokenString)
+  return userToken?.access_token
+}
 
-api = new TourneyApi(`${beURL}`, getToken());
+const api = new TourneyApi(`${beURL}`, getToken())
 
 export { api }

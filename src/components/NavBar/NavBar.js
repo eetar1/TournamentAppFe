@@ -36,6 +36,11 @@ export function NavBar ({ setToken }) {
                     active={activePath === '/matches'}
                     onClick={() => handleItemClick('/matches')}
                 />
+                <Menu.Item
+                    name='MyPage'
+                    active={activePath === '/me'}
+                    onClick={() => handleItemClick('/me')}
+                />
                 <Menu.Menu position='right'>
                     <Menu.Item
                         name='logout'

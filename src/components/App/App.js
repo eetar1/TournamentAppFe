@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Tournament } from '../Tournaments/Tournament'
 import { Dashboard } from '../Dashboard/Dashboard'
 import { Match } from '../Matches/Match'
+import { MyPage } from '../MyPage/MyPage'
 import React from 'react'
 
 export function App () {
@@ -23,6 +24,9 @@ export function App () {
                         <Switch>
                             <Route exact path={['/dashboard', '/']}>
                                 <Dashboard setToken={setToken}/>
+                            </Route>
+                            <Route exact path={'/me'}>
+                                <MyPage />
                             </Route>
                             <Route path="/matches">
                                 <Match/>

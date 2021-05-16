@@ -1,0 +1,16 @@
+.baseModal {
+    background: #1b1c1d !important;
+    border-bottom: 1px solid black !important;
+}
+
+.ui.modal>.content {
+    background: #1b1c1d !important;
+    border-bottom: 1px solid black !important;
+}
+.ui.form .field>label{
+    color: #00b5ad !important;
+}
+
+.react-datepicker-wrapper {
+    width:100%
+}

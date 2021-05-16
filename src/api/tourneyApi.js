@@ -50,13 +50,68 @@ export default class TourneyApi {
     }
 
     getTopTeams = async (pageSize = 20) => {
-      const url = `${this.apiHost}/teams/top?size=${pageSize}`
+      const url = `${this.apiHost}/teams/all?size=${pageSize}`
       const response = await fetch(url, {
         method: 'GET',
         headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
       })
       return handleErrors(response)
     }
+
+   getRecentMatches = async (pageSize = 20) => {
+     const url = `${this.apiHost}/matches/recent/complete?size=${pageSize}`
+     const response = await fetch(url, {
+       method: 'GET',
+       headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+     })
+     return handleErrors(response)
+   }
+
+  getToBeScheduledMatches = async (pageSize = 20) => {
+    const url = `${this.apiHost}/matches/schedule/me?size=${pageSize}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+    })
+    return handleErrors(response)
+  }
+
+  getToBeScoredMatches = async (pageSize = 20) => {
+    const url = `${this.apiHost}/matches/score/me?size=${pageSize}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+    })
+    return handleErrors(response)
+  }
+
+  createMatch = async (payload) => {
+    const url = `${this.apiHost}/matches`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' }),
+      body: JSON.stringify(payload)
+    })
+    return handleErrors(response)
+  }
+
+  getMyTeams = async (pageSize = 20) => {
+    const url = `${this.apiHost}/teams/me?size=${pageSize}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+    })
+    return handleErrors(response)
+  }
+
+  getMyTournaments = async (pageSize = 20) => {
+    const url = `${this.apiHost}/tournaments/me?size=${pageSize}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+    })
+    return handleErrors(response)
+  }
 }
 
 function handleErrors (response) {

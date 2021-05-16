@@ -8,6 +8,7 @@ export function Dashboard () {
   const loading = ''
   const [tournaments, setTournaments] = useState({})
   const [teams, setTeams] = useState({})
+  const [matches, setMatches] = useState([])
 
   useEffect(() => {
     async function getTopTournaments () {
@@ -15,8 +16,8 @@ export function Dashboard () {
         const tournaments = await api.getTopTournaments(5)
         setTournaments(tournaments.content)
       } catch (e) {
-        toast.error('Error Fetching User Account.')
-        console.log('Error Fetching User Account. Possible bad JWT, you will be logged out.' + e)
+        toast.error('Error Fetching Tournaments.')
+        console.log('Error Fetching Tournaments' + e)
       }
     }
 
@@ -24,13 +25,26 @@ export function Dashboard () {
   }, [tournaments.content])
 
   useEffect(() => {
+    async function getRecentMatches () {
+      try {
+        const matches = await api.getRecentMatches(5)
+        setMatches(matches.content)
+      } catch (e) {
+        toast.error('Error Fetching Matches.')
+        console.log('Error Fetching Matches' + e)
+      }
+    }
+    getRecentMatches()
+  }, [matches.content])
+
+  useEffect(() => {
     async function getTopTeams () {
       try {
         const teams = await api.getTopTeams(5)
         setTeams(teams.content)
       } catch (e) {
-        toast.error('Error Fetching User Account.')
-        console.log('Error Fetching User Account. Possible bad JWT, you will be logged out.' + e)
+        toast.error('Error Fetching Teams.')
+        console.log('Error Fetching Teams.' + e)
       }
     }
 
@@ -98,7 +112,7 @@ export function Dashboard () {
                                                         </Grid.Column>
                                                         <Grid.Column>
                                                             <CardDescription
-                                                                content={`Game Name: ${team.elo}`}/>
+                                                                content={`Team Elo: ${team.elo}`}/>
                                                         </Grid.Column>
                                                         <Grid.Column>
                                                             <CardDescription
@@ -124,6 +138,7 @@ export function Dashboard () {
                     <Grid.Column width={6}>
                         <Header color="teal" as="h1" content="Recent Matches"/>
                         <Divider/>
+                        {matches.length > 0 ? <div></div> : 'No matches have been played in the last week'}
                     </Grid.Column>
                 </Grid>
             </Segment>

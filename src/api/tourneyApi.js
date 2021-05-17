@@ -112,6 +112,16 @@ export default class TourneyApi {
     })
     return handleErrors(response)
   }
+
+  createTeam = async (payload) => {
+    const url = `${this.apiHost}/teams`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' }),
+      body: JSON.stringify(payload)
+    })
+    return handleErrors(response)
+  }
 }
 
 function handleErrors (response) {

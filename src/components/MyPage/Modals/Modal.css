@@ -14,3 +14,10 @@
 .react-datepicker-wrapper {
     width:100%
 }
+
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import './MyPage.css'
 import { CreateMatchModal } from './Modals/CreateMatchModal'
 import { CreateTeamModal } from './Modals/CreateTeamModal'
+import { CreateTournamentModal } from './Modals/CreateTournamentModal'
 
 export function MyPage () {
   const [toBeScheduled, setToBeScheduled] = useState([])
@@ -14,6 +15,7 @@ export function MyPage () {
 
   const [createMatchModal, setCreateMatchModal] = useState(false)
   const [createTeamModal, setCreateTeamModal] = useState(false)
+  const [createTournamentModal, setCreateTournamentModal] = useState(false)
 
   useEffect(() => {
     async function getToBeScheduledMatches () {
@@ -26,33 +28,7 @@ export function MyPage () {
       }
     }
     getToBeScheduledMatches()
-  }, [toBeScheduled.content])
-
-  useEffect(() => {
-    async function getMyTeams () {
-      try {
-        const teams = await api.getMyTeams(5)
-        setMyTeams(teams.content)
-      } catch (e) {
-        toast.error('Error getting my teams.')
-        console.log('Error Fetching my teams' + e)
-      }
-    }
-    getMyTeams()
-  }, [myTeams.content])
-
-  useEffect(() => {
-    async function getMyTournaments () {
-      try {
-        const tournaments = await api.getMyTournaments(5)
-        setMyTournaments(tournaments.content)
-      } catch (e) {
-        toast.error('Error getting my tournaments.')
-        console.log('Error Fetching my teams' + e)
-      }
-    }
-    getMyTournaments()
-  }, [myTournaments.content])
+  }, [createMatchModal])
 
   useEffect(() => {
     async function getToBeScoredMatches () {
@@ -65,7 +41,33 @@ export function MyPage () {
       }
     }
     getToBeScoredMatches()
-  }, [toBeScored.content])
+  }, [createMatchModal])
+
+  useEffect(() => {
+    async function getMyTeams () {
+      try {
+        const teams = await api.getMyTeams(5)
+        setMyTeams(teams.content)
+      } catch (e) {
+        toast.error('Error getting my teams.')
+        console.log('Error Fetching my teams' + e)
+      }
+    }
+    getMyTeams()
+  }, [createTeamModal])
+
+  useEffect(() => {
+    async function getMyTournaments () {
+      try {
+        const tournaments = await api.getMyTournaments(5)
+        setMyTournaments(tournaments.content)
+      } catch (e) {
+        toast.error('Error getting my tournaments.')
+        console.log('Error Fetching my teams' + e)
+      }
+    }
+    getMyTournaments()
+  }, [myTournaments])
 
   return (
         <div style={{ padding: '20px' }}>
@@ -73,7 +75,7 @@ export function MyPage () {
                 <Grid divided columns={2}>
                     <Grid.Column>
                         <Header color="teal" as="h1" content="Matches to be scheduled"/>
-                        <Button color="green" content="Create Match" onClick={() => setCreateTeamModal(true)}/>
+                        <Button color="green" content="Create Match" onClick={() => setCreateMatchModal(true)}/>
                         <Divider/>
                         {toBeScheduled.length > 0
                           ? <Card.Group color="green" centered items={toBeScheduled.map((match, i) => {
@@ -180,15 +182,16 @@ export function MyPage () {
                     </Grid.Column>
                     <Grid.Column className={'rightColumn'}>
                         <Header color="teal" as="h1" content="My Tournaments"/>
-                        <Button color="green" content="Form Tournament" onClick={() => setCreateTeamModal(true)}/>
+                        <Button color="green" content="Form Tournament" onClick={() => setCreateTournamentModal(true)}/>
                         <Divider />
                         {myTournaments.length > 0 ? <div></div> : 'You are not currently the organizer of any tournaments'}
                     </Grid.Column>
                 </Grid>
             </Segment>
             {/*    Modals */}
-             <CreateMatchModal open={createMatchModal} handleCloseModal={() => setCreateMatchModal(false)}/>
+             <CreateMatchModal open={createMatchModal} handleCloseModal={async () => { setCreateMatchModal(false) } }/>
              <CreateTeamModal open={createTeamModal} handleCloseModal={() => setCreateTeamModal(false)} />
+            <CreateTournamentModal open={createTournamentModal} handleCloseModal={() => setCreateTournamentModal(false)} />
         </div>
   )
 }

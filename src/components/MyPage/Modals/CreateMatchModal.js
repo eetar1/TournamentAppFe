@@ -14,8 +14,8 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
   const [official, setOfficial] = useState('')
   const [gameName, setGameName] = useState('')
 
-  async function createTeam () {
-    const payload = { matchDate: matchDate.toISOString(), homeTeam, awayTeam, gameName, official }
+  async function createMatch () {
+    const payload = { matchDate: matchDate?.toISOString(), homeTeam, awayTeam, gameName, official }
     try {
       await api.createMatch(payload)
       toast.success('Match Created')
@@ -49,7 +49,7 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
             </Modal.Header>
             <Modal.Content className={'baseModal'}>
                 <Modal.Description>
-                    <Form className={'baseModal'}>
+                    <Form>
                         <Form.Group widths='equal'>
                             <Form.Input
                                 label='Home Team Name'
@@ -94,9 +94,9 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
             <Modal.Actions className={'baseModal'}>
                 <Button negative floated="left" content="Cancel" color='red' onClick={ () => handleClose()} />
                 <Button
-                    content="Create Team"
+                    content="Create Match"
                     positive
-                    onClick={() => createTeam()}
+                    onClick={() => createMatch()}
                 />
             </Modal.Actions>
         </Modal>

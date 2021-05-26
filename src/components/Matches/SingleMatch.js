@@ -36,7 +36,7 @@ export function Match () {
                     <Grid.Column verticalAlign="top">
                         <Header className='match-title' size='huge'
                                 color='teal'>{match?.homeTeam?.name} vs. {match?.awayTeam?.name} {match.status === 'Complete' ? 'Complete' : ''}</Header>
-                        <h5 style={{ float: 'left' }}>{`Match Date:  ${match.matchDate ? match.matchDate : 'Unscheduled'}`}</h5>
+                        <h5 style={{ float: 'left' }}>{`Match Date:  ${match.matchDate ? match.matchDate.substring(0, 16) : 'Unscheduled'}`}</h5>
                     </Grid.Column>
 
                     <Grid.Column verticalAlign="top">

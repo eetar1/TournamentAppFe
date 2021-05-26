@@ -84,13 +84,9 @@ export function MyPage () {
                               children:
                                         <div className='portfolio-card-container'>
                                             <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
-                                                <Grid.Row columns={match.tournamentName ? 3 : 4 }>
+                                                <Grid.Row columns='3'>
                                                     <Grid.Column>
                                                         <Header content={`${match.homeTeam.name} vs. ${match.awayTeam.name}`} color="teal"/>
-                                                    </Grid.Column>
-                                                    <Grid.Column>
-                                                        <CardDescription
-                                                            content={`Game Name: ${match.gameName}`}/>
                                                     </Grid.Column>
                                                     <Grid.Column>
                                                         <CardDescription
@@ -100,6 +96,10 @@ export function MyPage () {
                                                         <CardDescription
                                                             content={`${match.awayTeam.name} Contact: ${match.awayTeam.contact}`}/>
                                                     </Grid.Column>
+                                                    <Grid.Column>
+                                                        <CardDescription
+                                                            content={`Game Name: ${match.gameName}`}/>
+                                                    </Grid.Column>
 
                                                     {match.tournamentName
                                                       ? <Grid.Column>
@@ -108,7 +108,7 @@ export function MyPage () {
                                                       : ''}
                                                       {match.matchDate
                                                         ? <Grid.Column>
-                                                        <CardDescription content={ `Match Date: ${match.matchDate}` } color="teal"/>
+                                                        <CardDescription content={ `Match Date: ${match.matchDate.substring(0, 16)}` } color="teal"/>
                                                     </Grid.Column>
                                                         : ''}
 
@@ -156,7 +156,7 @@ export function MyPage () {
                               href: `/matches/${match.id}`
                             }
                           })}/>
-                          : 'Matches will appear here 24 hours after their scheduled date'}
+                          : 'Matches will appear here after their scheduled date'}
 
                     </Grid.Column>
                     <Grid.Column>

@@ -74,7 +74,6 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
                                 <DatePicker placeholderText='Optional' dateFormat='Pp' selected={matchDate}
                                             showTimeSelect onChange={(value) => setMatchDate(value)}/>
                             </div>
-                            {/* <SemanticDatepicker datePickerOnly label='Matchs Date' format='YYYY-MM-DD-HH' locale='en-US' onChange={(e, { value }) => setMatchDate(value.toISOString())}/>; */}
                         </Form.Group>
                         <Form.Group widths='equal'>
                             <Form.Input

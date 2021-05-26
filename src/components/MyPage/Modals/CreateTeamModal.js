@@ -60,7 +60,7 @@ export function CreateTeamModal ({ open, handleCloseModal }) {
                                 label=' Team Name'
                                 fluid
                                 placeholder='Team Name'
-                                width={6}
+                                width={8}
                                 onChange={(e, { value }) => setTeamName(value)}
                             />
                         </Form.Group>

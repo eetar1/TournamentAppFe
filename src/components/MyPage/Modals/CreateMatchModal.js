@@ -1,4 +1,4 @@
-import { Modal, Header, Form, Button, Dimmer, Loader } from 'semantic-ui-react'
+import { Modal, Header, Form, Button } from 'semantic-ui-react'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { api } from '../../../api/api'
@@ -18,7 +18,7 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
     const payload = { matchDate: matchDate?.toISOString(), homeTeam, awayTeam, gameName, official }
     try {
       await api.createMatch(payload)
-      toast.success('Match Created')
+      toast.success('Matchs Created')
       handleCloseModal()
     } catch (e) {
       toast.error('Failed to create match.')
@@ -40,10 +40,8 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
             onClose={() => handleClose()}
             open={open}
             dimmer="blurring"
-            size="tiny">
-            <Dimmer active={false}>
-                <Loader>{'Processing Deposit...'}</Loader>
-            </Dimmer>
+            size="tiny"
+            detachable="false">
             <Modal.Header className={'baseModal'}>
                 <Header color="teal" as="h1" content="Create a Match"/>
             </Modal.Header>
@@ -72,10 +70,11 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
                                 onChange={(e, { value }) => setGameName(value)}
                             />
                             <div className='field'>
-                            <label>Match Date</label>
-                            <DatePicker placeholderText='Optional' dateFormat='Pp' selected={matchDate} showTimeSelect onChange={(value) => setMatchDate(value)}/>
+                                <label>Match Date</label>
+                                <DatePicker placeholderText='Optional' dateFormat='Pp' selected={matchDate}
+                                            showTimeSelect onChange={(value) => setMatchDate(value)}/>
                             </div>
-                            {/* <SemanticDatepicker datePickerOnly label='Match Date' format='YYYY-MM-DD-HH' locale='en-US' onChange={(e, { value }) => setMatchDate(value.toISOString())}/>; */}
+                            {/* <SemanticDatepicker datePickerOnly label='Matchs Date' format='YYYY-MM-DD-HH' locale='en-US' onChange={(e, { value }) => setMatchDate(value.toISOString())}/>; */}
                         </Form.Group>
                         <Form.Group widths='equal'>
                             <Form.Input
@@ -85,21 +84,24 @@ export function CreateMatchModal ({ open, handleCloseModal }) {
                                 onChange={(e, { value }) => setOfficial(value)}
                             />
                             <Form.Input value={matchDate ? 'Scheduled' : 'Created'} fluid
-                                        label='Match will be created with Status' placeholder='Read only' readOnly/>
+                                        label='Matchs will be created with Status' placeholder='Read only'
+                                        readOnly/>
                         </Form.Group>
 
                     </Form>
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions className={'baseModal'}>
-                <Button negative floated="left" content="Cancel" color='red' onClick={ () => handleClose()} />
+                <Button negative floated="left" content="Cancel" color='red' onClick={() => handleClose()}/>
                 <Button
-                    content="Create Match"
+                    content="Create Matchs"
                     positive
                     onClick={() => createMatch()}
                 />
             </Modal.Actions>
+
         </Modal>
+
   )
 }
 

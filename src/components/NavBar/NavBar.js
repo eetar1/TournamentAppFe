@@ -32,6 +32,11 @@ export function NavBar ({ setToken }) {
                     onClick={() => handleItemClick('/tournaments')}
                 />
                 <Menu.Item
+                    name='Teams'
+                    active={activePath === '/teams'}
+                    onClick={() => handleItemClick('/teams')}
+                />
+                <Menu.Item
                     name='Matchs'
                     active={activePath === '/matches'}
                     onClick={() => handleItemClick('/matches')}

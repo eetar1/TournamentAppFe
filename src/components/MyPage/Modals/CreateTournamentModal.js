@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Dimmer, Form, Grid, Header, Icon, Loader, Modal } from 'semantic-ui-react'
+import { api } from '../../../api/api'
+import { toast } from 'react-toastify'
 
 export function CreateTournamentModal ({ open, handleCloseModal }) {
   const [tournamentName, setTournamentName] = useState('')
@@ -8,6 +10,9 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
   const [teams, setTeams] = useState(['', '', ''])
 
   function handleClose () {
+    setTeams(['', '', ''])
+    setGameName('')
+    setTournamentName('')
     handleCloseModal()
   }
 
@@ -19,10 +24,16 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
     setTeams([...teams, { ...'' }])
   }
 
-  function createTournament () {
-    // eslint-disable-next-line no-unused-vars
-    const payload = { name: tournamentName, gameName, teams }
-    return undefined
+  async function createTournament () {
+    try {
+      const payload = { name: tournamentName, gameName, teams }
+      await api.createTournament(payload)
+      toast.success('Tournament Created')
+      handleClose()
+    } catch (e) {
+      toast.error('Failed to create tournament')
+      console.log('Failed to create tournament ' + e)
+    }
   }
 
   function removeTeam () {
@@ -94,7 +105,7 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
             <Modal.Actions className={'baseModal'}>
                 <Button negative floated="left" content="Cancel" color='red' onClick={() => handleClose()}/>
                 <Button
-                    content="Create Match"
+                    content="Create Matchs"
                     positive
                     onClick={() => createTournament()}
                 />

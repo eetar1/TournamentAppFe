@@ -68,7 +68,7 @@ export default class TourneyApi {
    }
 
   getToBeScheduledMatches = async (pageSize = 20) => {
-    const url = `${this.apiHost}/matches/schedule/me?size=${pageSize}`
+    const url = `${this.apiHost}/matches/me?size=${pageSize}`
     const response = await fetch(url, {
       method: 'GET',
       headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -119,6 +119,35 @@ export default class TourneyApi {
       method: 'POST',
       headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' }),
       body: JSON.stringify(payload)
+    })
+    return handleErrors(response)
+  }
+
+  createTournament = async (payload) => {
+    const url = `${this.apiHost}/tournaments`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' }),
+      body: JSON.stringify(payload)
+    })
+    return handleErrors(response)
+  }
+
+  getMatchById = async (id) => {
+    const url = `${this.apiHost}/matches/${id}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+    })
+    return handleErrors(response)
+  }
+
+  scheduleMatch = async (date, id) => {
+    const url = `${this.apiHost}/matches/schedule/${id}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' }),
+      body: JSON.stringify({ date })
     })
     return handleErrors(response)
   }

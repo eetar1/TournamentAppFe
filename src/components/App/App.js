@@ -6,7 +6,8 @@ import { NavBar } from '../NavBar/NavBar'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Tournament } from '../Tournaments/Tournament'
 import { Dashboard } from '../Dashboard/Dashboard'
-import { Match } from '../Matches/Match'
+import { Matchs } from '../Matches/Matchs'
+import { Match } from '../Matches/SingleMatch'
 import { MyPage } from '../MyPage/MyPage'
 import React from 'react'
 
@@ -26,10 +27,13 @@ export function App () {
                                 <Dashboard setToken={setToken}/>
                             </Route>
                             <Route exact path={'/me'}>
-                                <MyPage />
+                                <MyPage/>
+                            </Route>
+                            <Route path="/match/:id">
+                                <Match/>
                             </Route>
                             <Route path="/matches">
-                                <Match/>
+                                <Matchs/>
                             </Route>
                             <Route path="/tournaments">
                                 <Tournament/>

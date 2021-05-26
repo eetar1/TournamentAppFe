@@ -28,7 +28,7 @@ export function MyPage () {
       }
     }
     getToBeScheduledMatches()
-  }, [createMatchModal])
+  }, [createMatchModal, createTournamentModal])
 
   useEffect(() => {
     async function getToBeScoredMatches () {
@@ -67,7 +67,7 @@ export function MyPage () {
       }
     }
     getMyTournaments()
-  }, [myTournaments])
+  }, [createTournamentModal])
 
   return (
         <div style={{ padding: '20px' }}>
@@ -75,7 +75,7 @@ export function MyPage () {
                 <Grid divided columns={2}>
                     <Grid.Column>
                         <Header color="teal" as="h1" content="Matches to be scheduled"/>
-                        <Button color="green" content="Create Match" onClick={() => setCreateMatchModal(true)}/>
+                        <Button color="green" content="Create Matchs" onClick={() => setCreateMatchModal(true)}/>
                         <Divider/>
                         {toBeScheduled.length > 0
                           ? <Card.Group color="green" centered items={toBeScheduled.map((match, i) => {
@@ -84,7 +84,7 @@ export function MyPage () {
                               children:
                                         <div className='portfolio-card-container'>
                                             <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
-                                                <Grid.Row columns={4}>
+                                                <Grid.Row columns={match.tournamentName ? 3 : 4 }>
                                                     <Grid.Column>
                                                         <Header content={`${match.homeTeam.name} vs. ${match.awayTeam.name}`} color="teal"/>
                                                     </Grid.Column>
@@ -100,6 +100,18 @@ export function MyPage () {
                                                         <CardDescription
                                                             content={`${match.awayTeam.name} Contact: ${match.awayTeam.contact}`}/>
                                                     </Grid.Column>
+
+                                                    {match.tournamentName
+                                                      ? <Grid.Column>
+                                                        <CardDescription content={ `Tournament Name: ${match.tournamentName}` } color="teal"/>
+                                                    </Grid.Column>
+                                                      : ''}
+                                                      {match.matchDate
+                                                        ? <Grid.Column>
+                                                        <CardDescription content={ `Match Date: ${match.matchDate}` } color="teal"/>
+                                                    </Grid.Column>
+                                                        : ''}
+
                                                 </Grid.Row>
                                             </Grid>
                                         </div>,
@@ -107,7 +119,7 @@ export function MyPage () {
                               fluid: true,
                               className: 'portfolio-cards',
                               key: i,
-                              href: `/matches/${match.id}`
+                              href: `/match/${match.id}`
                             }
                           })}/>
                           : 'No Matches to be scheduled'}
@@ -132,7 +144,7 @@ export function MyPage () {
                                                     </Grid.Column>
                                                     <Grid.Column>
                                                         <CardDescription
-                                                            content={`Match Date: ${match.matchDate}`}/>
+                                                            content={`Matchs Date: ${match.matchDate}`}/>
                                                     </Grid.Column>
                                                 </Grid.Row>
                                             </Grid>
@@ -166,7 +178,7 @@ export function MyPage () {
                                                         <CardDescription content={ `Elo: ${team.elo}` } color="teal"/>
                                                     </Grid.Column>
                                                     <Grid.Column>
-                                                        <CardDescription content={ `Next Match Date: ${team.nextMatchDate}` } color="teal"/>
+                                                        <CardDescription content={ `Next Matchs Date: ${team.nextMatchDate}` } color="teal"/>
                                                     </Grid.Column>
                                                 </Grid.Row>
                                             </Grid>
@@ -184,7 +196,36 @@ export function MyPage () {
                         <Header color="teal" as="h1" content="My Tournaments"/>
                         <Button color="green" content="Form Tournament" onClick={() => setCreateTournamentModal(true)}/>
                         <Divider />
-                        {myTournaments.length > 0 ? <div></div> : 'You are not currently the organizer of any tournaments'}
+                        {myTournaments.length > 0
+                          ? <Card.Group color="green" centered items={myTournaments.map((tournament, i) => {
+                            return {
+                              //  My Teams
+                              children:
+                                        <div className='portfolio-card-container'>
+                                            <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
+                                                <Grid.Row columns={3}>
+                                                    <Grid.Column>
+                                                        <Header content={tournament.name} color="teal"/>
+                                                    </Grid.Column>
+                                                    <Grid.Column>
+                                                        <CardDescription content={`Game Name: ${tournament.gameName}`} color="teal"/>
+                                                    </Grid.Column>
+                                                    <Grid.Column>
+                                                        <CardDescription
+                                                            content={`Next Matchs Date: ${tournament.nextMatchDate}`}
+                                                            color="teal"/>
+                                                    </Grid.Column>
+                                                </Grid.Row>
+                                            </Grid>
+                                        </div>,
+                              color: 'teal',
+                              fluid: true,
+                              className: 'portfolio-cards',
+                              key: i,
+                              href: `/matches/${tournament.id}`
+                            }
+                          })}/>
+                          : 'You are not currently the organizer of any tournaments'}
                     </Grid.Column>
                 </Grid>
             </Segment>

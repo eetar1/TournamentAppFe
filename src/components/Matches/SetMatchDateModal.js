@@ -29,7 +29,7 @@ export function SetMatchDateModal ({ open, onClose, matchId }) {
             onClose={() => handleClose()}
             open={open}
             dimmer="blurring"
-            size="single"
+            size="mini"
             detachable="false">
             <Modal.Header className={'baseModal'}>
                 <Header color="teal" as="h1" content="Schedule Match"/>

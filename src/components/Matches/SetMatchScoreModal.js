@@ -10,8 +10,8 @@ export function SetMatchScoreModal ({ open, onClose, matchId }) {
 
   const options = [{ key: 'hv', text: 'Home_Victory', value: 'Home_Victory' }, {
     key: 'av',
-    text: 'Away Victory',
-    value: 'Away Victory'
+    text: 'Away_Victory',
+    value: 'Away_Victory'
   }, { key: 'dd', text: 'Draw', value: 'Draw' }]
 
   async function scoreMatch () {

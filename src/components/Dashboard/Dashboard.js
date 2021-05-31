@@ -22,7 +22,7 @@ export function Dashboard () {
     }
 
     getTopTournaments()
-  }, [tournaments.content])
+  }, [])
 
   useEffect(() => {
     async function getRecentMatches () {
@@ -34,8 +34,9 @@ export function Dashboard () {
         console.log('Error Fetching Matches' + e)
       }
     }
+
     getRecentMatches()
-  }, [matches.content])
+  }, [])
 
   useEffect(() => {
     async function getTopTeams () {
@@ -49,7 +50,7 @@ export function Dashboard () {
     }
 
     getTopTeams()
-  }, [teams.content])
+  }, [])
 
   return (
         <div style={{ padding: '20px' }}>
@@ -68,8 +69,9 @@ export function Dashboard () {
                                 return {
                                   children:
                                             <div className='portfolio-card-container'>
-                                                <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
-                                                    <Grid.Row columns={4}>
+                                                <Grid columns={5} style={{ width: '100%', marginBottom: '-2rem' }}
+                                                      divided='vertically'>
+                                                    <Grid.Row>
                                                         <Grid.Column>
                                                             <Header content={tournament.name} color="teal"/>
                                                         </Grid.Column>
@@ -80,6 +82,10 @@ export function Dashboard () {
                                                         <Grid.Column>
                                                             <CardDescription
                                                                 content={`Organizer: ${tournament.organizer}`}/>
+                                                        </Grid.Column>
+                                                        <Grid.Column>
+                                                            <CardDescription
+                                                                content={`Status: ${tournament.status}`}/>
                                                         </Grid.Column>
                                                         <Grid.Column>
                                                             <CardDescription
@@ -105,7 +111,8 @@ export function Dashboard () {
                                 return {
                                   children:
                                             <div className='portfolio-card-container'>
-                                                <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
+                                                <Grid style={{ width: '100%', marginBottom: '-2rem' }}
+                                                      divided='vertically'>
                                                     <Grid.Row columns={4}>
                                                         <Grid.Column>
                                                             <Header content={team.name} color="teal"/>
@@ -138,7 +145,55 @@ export function Dashboard () {
                     <Grid.Column width={6}>
                         <Header color="teal" as="h1" content="Recent Matches"/>
                         <Divider/>
-                        {matches.length > 0 ? <div></div> : 'No matches have been played in the last week'}
+                        {matches.length > 0
+                          ? <Card.Group color="green" centered items={matches.map((match, i) => {
+                            return {
+                              //  To be scored matches
+                              children:
+                                        <div className='portfolio-card-container'>
+                                            <Grid columns={12} style={{ width: '100%', marginBottom: '-2rem' }}
+                                                  divided='vertically'>
+                                                <Grid.Row>
+                                                    <Grid.Column width={2}>
+                                                        <Header
+                                                            content={`${match.homeTeam.name} vs. ${match.awayTeam.name}`}
+                                                            color="teal"/>
+                                                    </Grid.Column>
+                                                    <Grid.Column width={4}>
+                                                        <CardDescription
+                                                            content={`Game Name: ${match.gameName}`}/>
+                                                    </Grid.Column>
+
+                                                    {match.tournamentName
+                                                      ? <Grid.Column width={5}>
+                                                            <CardDescription
+                                                                content={`Tournament Name: ${match.tournamentName}`}
+                                                                color="teal"/>
+                                                        </Grid.Column>
+                                                      : ''}
+                                                    <Grid.Column width={4}>
+                                                        <CardDescription
+                                                            content={`Result: ${match.result}`}
+                                                            color="teal"/>
+                                                    </Grid.Column>
+                                                    <Grid.Column width={3}>
+                                                        <CardDescription
+                                                            content={`Score: ${match.score}`}
+                                                            color="teal"/>
+                                                    </Grid.Column>
+
+                                                </Grid.Row>
+                                            </Grid>
+                                        </div>,
+                              color: 'teal',
+                              fluid: true,
+                              className: 'portfolio-cards',
+                              key: i,
+                              href: `/match/${match.id}`
+                            }
+                          })}/>
+                          : 'Matches will appear here after their scheduled date'}
+
                     </Grid.Column>
                 </Grid>
             </Segment>

@@ -60,9 +60,9 @@ export function MyPage () {
   }, [createTeamModal, createMatchModal, createTournamentModal])
 
   useEffect(() => {
-    async function getMyTournaments () {
+    async function getMyInProgressTournaments () {
       try {
-        const tournaments = await api.getMyTournaments(5)
+        const tournaments = await api.getMyInProgressTournaments(5)
         setMyTournaments(tournaments.content)
       } catch (e) {
         toast.error('Error getting my tournaments.')
@@ -70,7 +70,7 @@ export function MyPage () {
       }
     }
 
-    getMyTournaments()
+    getMyInProgressTournaments()
   }, [createTournamentModal])
 
   return (
@@ -143,21 +143,34 @@ export function MyPage () {
                               //  To be scored matches
                               children:
                                         <div className='portfolio-card-container'>
-                                            <Grid style={{ width: '100%', marginBottom: '-2rem' }} divided='vertically'>
-                                                <Grid.Row columns={3}>
-                                                    <Grid.Column>
+                                            <Grid columns={12} style={{ width: '100%', marginBottom: '-2rem' }}
+                                                  divided='vertically'>
+                                                <Grid.Row>
+                                                    <Grid.Column width={2}>
                                                         <Header
                                                             content={`${match.homeTeam.name} vs. ${match.awayTeam.name}`}
                                                             color="teal"/>
                                                     </Grid.Column>
-                                                    <Grid.Column>
+                                                    <Grid.Column width={4}>
                                                         <CardDescription
                                                             content={`Game Name: ${match.gameName}`}/>
                                                     </Grid.Column>
-                                                    <Grid.Column>
-                                                        <CardDescription
-                                                            content={`Match Date: ${match.matchDate}`}/>
-                                                    </Grid.Column>
+
+                                                    {match.tournamentName
+                                                      ? <Grid.Column width={4}>
+                                                            <CardDescription
+                                                                content={`Tournament Name: ${match.tournamentName}`}
+                                                                color="teal"/>
+                                                        </Grid.Column>
+                                                      : ''}
+                                                    {match.matchDate
+                                                      ? <Grid.Column width={5}>
+                                                            <CardDescription
+                                                                content={`Match Date: ${new Date(match.matchDate).toLocaleString().slice(0, -3)}`}
+                                                                color="teal"/>
+                                                        </Grid.Column>
+                                                      : ''}
+
                                                 </Grid.Row>
                                             </Grid>
                                         </div>,
@@ -226,8 +239,12 @@ export function MyPage () {
                                                                          color="teal"/>
                                                     </Grid.Column>
                                                     <Grid.Column>
+                                                        <CardDescription content={`Game Name: ${tournament.gameName}`}
+                                                                         color="teal"/>
+                                                    </Grid.Column>
+                                                    <Grid.Column>
                                                         <CardDescription
-                                                            content={`Next Matchs Date: ${new Date(tournament.nextMatchDate).toLocaleString().slice(0, -3)}`}
+                                                            content={`Next Match Date: ${tournament.nextMatchdate ? new Date(tournament.nextMatchDate).toLocaleString().slice(0, -3) : null}`}
                                                             color="teal"/>
                                                     </Grid.Column>
                                                 </Grid.Row>
@@ -240,7 +257,7 @@ export function MyPage () {
                               href: `/tournament/${tournament.id}`
                             }
                           })}/>
-                          : 'You are not currently the organizer of any tournaments'}
+                          : 'You are not currently the organizer of any  ongoing tournaments'}
                     </Grid.Column>
                 </Grid>
             </Segment>

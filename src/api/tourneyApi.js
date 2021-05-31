@@ -50,7 +50,7 @@ export default class TourneyApi {
     }
 
     getTopTeams = async (pageSize = 20) => {
-      const url = `${this.apiHost}/teams/all?size=${pageSize}`
+      const url = `${this.apiHost}/teams/top?size=${pageSize}`
       const response = await fetch(url, {
         method: 'GET',
         headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -114,8 +114,8 @@ export default class TourneyApi {
       return handleErrors(response)
     }
 
-    getMyTournaments = async (pageSize = 20) => {
-      const url = `${this.apiHost}/tournaments/me?size=${pageSize}`
+    getMyInProgressTournaments = async (pageSize = 20) => {
+      const url = `${this.apiHost}/tournaments/ongoing/me?size=${pageSize}`
       const response = await fetch(url, {
         method: 'GET',
         headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })

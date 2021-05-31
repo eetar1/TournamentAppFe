@@ -51,34 +51,32 @@ export function Match () {
                 </Grid>
 
                 <Divider style={{ margin: '.5em 0 1em 0' }}/>
-                {match.tournamentName
-                  ? <div><Grid divided columns={3} style={{ padding: '0 .5em 0 2em' }}>
-                        {match.tournamentName
-                          ? <Grid.Column verticalAlign="top">
-                                <Header color='teal'>{`Part of tournament: ${match.tournamentName}`} </Header>
+                < Grid divided columns={12} style={{ padding: '0 1em  0 2em' }}>
+                    {
+                        match.tournamentName
+                          ? <Grid.Column width={3}>
+                                <Header size='large'
+                                        color='teal'>{`Part of tournament: ${match.tournamentName}`} </Header>
                             </Grid.Column>
-                          : ''}
-                    </Grid>
-                        <Divider style={{ margin: '1em 0 1em 0' }}/>
-                    </div>
-                  : ''
-                }
+                          : ''
+                    }
 
-                {match.status === 'Complete'
-                  ? <div>
-                        < Grid divided columns={12} style={{ padding: '0 1em  0 2em' }}>
-                            <GridColumn>
-                                <Header size='large' color='teal'>{`Score: ${match.score}`} </Header>
-                            </GridColumn>
-                            <GridColumn width={4}>
-                                <Header size='large' color='teal'>{`Result: ${match.result}`} </Header>
-                            </GridColumn>
-                        </Grid>
-                        <Divider style={{ margin: '1em 0 1em 0' }}/>
-                    </div>
-                  : ''
+                    {match.status === 'Complete'
+                      ? <GridColumn>
+                                    <Header size='large' color='teal'>{`Score: ${match.score}`} </Header>
+                                </GridColumn>
+                      : ''
+                    }
 
-                }
+                    {match.status === 'Complete'
+                      ? <GridColumn width={4}>
+                            <Header size='large' color='teal'>{`Result: ${match.result}`} </Header>
+                        </GridColumn>
+                      : ''
+                    }
+
+                </Grid>
+                <Divider style={{ margin: '1em 0 1em 0' }}/>
 
                 <Grid divided columns={2} style={{ padding: '0 .5em 0 2em' }}>
 

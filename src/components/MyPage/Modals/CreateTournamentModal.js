@@ -105,7 +105,7 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
             <Modal.Actions className={'baseModal'}>
                 <Button negative floated="left" content="Cancel" color='red' onClick={() => handleClose()}/>
                 <Button
-                    content="Create Matchs"
+                    content="Create Matches"
                     positive
                     onClick={() => createTournament()}
                 />

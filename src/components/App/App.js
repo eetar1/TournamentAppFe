@@ -4,12 +4,13 @@ import { Jwt } from './../../api/jwt'
 import { Login } from '../Login/Login'
 import { NavBar } from '../NavBar/NavBar'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Tournament } from '../Tournaments/Tournament'
+import { Tournaments } from '../Tournaments/Tournaments'
 import { Dashboard } from '../Dashboard/Dashboard'
 import { Matchs } from '../Matches/Matchs'
 import { Match } from '../Matches/SingleMatch'
 import { MyPage } from '../MyPage/MyPage'
 import React from 'react'
+import { Tournament } from '../Tournaments/SingleTournament'
 
 export function App () {
   const { token, setToken } = Jwt()
@@ -32,11 +33,14 @@ export function App () {
                             <Route path="/match/:id">
                                 <Match/>
                             </Route>
+                            <Route path="/tournament/:id">
+                                <Tournament/>
+                            </Route>
                             <Route path="/matches">
                                 <Matchs/>
                             </Route>
                             <Route path="/tournaments">
-                                <Tournament/>
+                                <Tournaments/>
                             </Route>
                         </Switch>
                     </div>

@@ -76,7 +76,7 @@ export function Match () {
                     }
 
                 </Grid>
-                <Divider style={{ margin: '1em 0 1em 0' }}/>
+                { match.tournamentName || match.status === 'Complete' ? <Divider style={{ margin: '1em 0 1em 0' }}/> : ''}
 
                 <Grid divided columns={2} style={{ padding: '0 .5em 0 2em' }}>
 

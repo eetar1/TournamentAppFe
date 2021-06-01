@@ -110,7 +110,7 @@ export function MyPage () {
                                                     {match.tournamentName
                                                       ? <Grid.Column>
                                                             <CardDescription
-                                                                content={`Tournament Name: ${match.tournamentName}`}
+                                                                content={`Tournaments Name: ${match.tournamentName}`}
                                                                 color="teal"/>
                                                         </Grid.Column>
                                                       : ''}
@@ -159,7 +159,7 @@ export function MyPage () {
                                                     {match.tournamentName
                                                       ? <Grid.Column width={4}>
                                                             <CardDescription
-                                                                content={`Tournament Name: ${match.tournamentName}`}
+                                                                content={`Tournaments Name: ${match.tournamentName}`}
                                                                 color="teal"/>
                                                         </Grid.Column>
                                                       : ''}
@@ -221,7 +221,7 @@ export function MyPage () {
                     </Grid.Column>
                     <Grid.Column className={'rightColumn'}>
                         <Header color="teal" as="h1" content="My Tournaments"/>
-                        <Button color="green" content="Form Tournament" onClick={() => setCreateTournamentModal(true)}/>
+                        <Button color="green" content="Form Tournaments" onClick={() => setCreateTournamentModal(true)}/>
                         <Divider/>
                         {myTournaments.length > 0
                           ? <Card.Group color="green" centered items={myTournaments.map((tournament, i) => {

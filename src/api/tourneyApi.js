@@ -161,6 +161,15 @@ export default class TourneyApi {
       })
       return handleErrors(response)
     }
+
+   getTournamentById = async (tournamentId) => {
+     const url = `${this.apiHost}/tournaments/id/${tournamentId}`
+     const response = await fetch(url, {
+       method: 'GET',
+       headers: this.headers({ 'Content-Type': 'application/json; charset=utf-8' })
+     })
+     return handleErrors(response)
+   }
 }
 
 function handleErrors (response) {

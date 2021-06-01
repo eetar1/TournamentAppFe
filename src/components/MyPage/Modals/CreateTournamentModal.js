@@ -28,7 +28,7 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
     try {
       const payload = { name: tournamentName, gameName, teams }
       await api.createTournament(payload)
-      toast.success('Tournament Created')
+      toast.success('Tournaments Created')
       handleClose()
     } catch (e) {
       toast.error('Failed to create tournament')
@@ -52,16 +52,16 @@ export function CreateTournamentModal ({ open, handleCloseModal }) {
                 <Loader>{'Processing Deposit...'}</Loader>
             </Dimmer>
             <Modal.Header className={'baseModal'}>
-                <Header color="teal" as="h1" content="Create a Tournament"/>
+                <Header color="teal" as="h1" content="Create a Tournaments"/>
             </Modal.Header>
             <Modal.Content scrolling className={'baseModal'}>
                 <Modal.Description>
                     <Form>
                         <Form.Group widths='equal'>
                             <Form.Input
-                                label='Tournament Name'
+                                label='Tournaments Name'
                                 fluid
-                                placeholder='Tournament Name'
+                                placeholder='Tournaments Name'
                                 onChange={(e, { value }) => setTournamentName(value)}
                             />
                             <Form.Input

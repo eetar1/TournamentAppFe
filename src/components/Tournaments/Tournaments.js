@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Tournament () {
+export function Tournaments () {
   return (
         <div></div>
   )
